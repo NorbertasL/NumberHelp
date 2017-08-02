@@ -1,7 +1,6 @@
 package com.example.red_spark.numberhelp;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -9,10 +8,11 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.example.red_spark.numberhelp.tools.InputHelper;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -130,35 +130,17 @@ public class ValueFragment extends Fragment {
             return true;
         }
         switch (valueType){
-            //tries to cast the string into a long.If it fails that means the string contains
-            //non-numeric values
             case Constants.VALUE_TYPE.DEC:
-                try{
-                    Long.valueOf(s);
-                    return true;
-                }catch (NumberFormatException e){
-                    return false;
-                }
+                return InputHelper.checkIfDec(s);
+
             case Constants.VALUE_TYPE.OCT:
-                //tries to cast the string into a long.If it fails that means the string contains
-                //non-numeric values
-                try{
-                    Long.valueOf(s);
-                    for(int i = 0; i< s.length(); i++){
-                        //have to use Character.getNumericValue or we get wrong value
-                        int digit = Integer.valueOf(Character.getNumericValue(s.charAt(i)));
-                        //check if any of the digits are > or = to 8(Oct is a base of 8)
-                        //if it is its not a valid number
-                        if(digit >= 8) {
-                            return false;
-                        }
-                    }
+                return InputHelper.checkIfOct(s);
 
-                    return true;
-                }catch (NumberFormatException e){
-                    return false;
-                }
+            case Constants.VALUE_TYPE.BIN:
+                return InputHelper.checkIfBin(s);
 
+            case Constants.VALUE_TYPE.HEX:
+                return InputHelper.checkIfHex(s);
         }
 
         return false;

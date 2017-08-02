@@ -1,5 +1,6 @@
-package com.example.red_spark.numberhelp;
+package com.example.red_spark.numberhelp.tools;
 
+import com.example.red_spark.numberhelp.Constants;
 import com.example.red_spark.numberhelp.Constants.VALUE_TYPE;
 
 /**

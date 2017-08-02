@@ -7,7 +7,7 @@ package com.example.red_spark.numberhelp;
  */
 
 public class Constants {
-    class VALUE_TYPE{
+    public class VALUE_TYPE{
         public final static String DEC = "DEC:";
         public final static String HEX = "HEX:";
         public final static String BIN = "BIN:";
