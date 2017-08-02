@@ -6,12 +6,17 @@
     tools:context="com.example.red_spark.numberhelp.ValueFragment"
     android:orientation="horizontal">
 
+    <TextView
+        android:id="@+id/tv_ValueName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
     <EditText
         android:id="@+id/et_NumEditTextField"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="number" />
+        android:ems="10"/>
 
     <Button
         android:id="@+id/bt_Convert"
