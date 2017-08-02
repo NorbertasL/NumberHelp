@@ -1,6 +1,7 @@
 package com.example.red_spark.numberhelp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -58,20 +59,28 @@ public class ValueFragment extends Fragment {
 
         mTextField.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-
+            public void beforeTextChanged(CharSequence c, int start, int count, int after) {
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(mTextField.hasFocus())
-                    sendData();
             }
 
             @Override
              public void afterTextChanged(Editable s) {
+                if(mTextField.hasFocus()) {
+                    if(!inputCheck(mTextField.getText().toString())){
+                        String temp = mTextField.getText().toString();
+                        temp = temp.substring(0, temp.length()-1);
+                        mTextField.setText(temp);
 
+                        //setSelection moves the cursor to the end of the text field
+                        mTextField.setSelection(temp.length());
+
+                    }else {
+                        sendData();
+                    }
+                }
              }
         });
 
@@ -111,6 +120,48 @@ public class ValueFragment extends Fragment {
 
     public String getValueType(){
         return valueType;
+    }
+
+    //check if the user inputs is valid
+    public boolean inputCheck(String s){
+        //TODO implement negative numbers too
+
+        if(s.isEmpty()){
+            return true;
+        }
+        switch (valueType){
+            //tries to cast the string into a long.If it fails that means the string contains
+            //non-numeric values
+            case Constants.VALUE_TYPE.DEC:
+                try{
+                    Long.valueOf(s);
+                    return true;
+                }catch (NumberFormatException e){
+                    return false;
+                }
+            case Constants.VALUE_TYPE.OCT:
+                //tries to cast the string into a long.If it fails that means the string contains
+                //non-numeric values
+                try{
+                    Long.valueOf(s);
+                    for(int i = 0; i< s.length(); i++){
+                        //have to use Character.getNumericValue or we get wrong value
+                        int digit = Integer.valueOf(Character.getNumericValue(s.charAt(i)));
+                        //check if any of the digits are > or = to 8(Oct is a base of 8)
+                        //if it is its not a valid number
+                        if(digit >= 8) {
+                            return false;
+                        }
+                    }
+
+                    return true;
+                }catch (NumberFormatException e){
+                    return false;
+                }
+
+        }
+
+        return false;
     }
 
 }
