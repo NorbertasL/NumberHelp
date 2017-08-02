@@ -3,9 +3,12 @@ package com.example.red_spark.numberhelp;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -53,6 +56,25 @@ public class ValueFragment extends Fragment {
         unbinder = ButterKnife.bind(this, rootView);
         mName.setText(valueType);
 
+        mTextField.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(mTextField.hasFocus())
+                    sendData();
+            }
+
+            @Override
+             public void afterTextChanged(Editable s) {
+
+             }
+        });
+
         mConvertButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -63,6 +85,7 @@ public class ValueFragment extends Fragment {
 
         return rootView;
     }
+
 
     @Override
     public void onDestroyView() {

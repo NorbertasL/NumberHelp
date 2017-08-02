@@ -22,6 +22,8 @@ public class MainActivity extends AppCompatActivity implements ValueFragment.Val
 
         //checking for save instance state
         if(savedInstanceState == null) {
+
+            //I know this is a bit messy, ill fix in when I have time
             mFragmentList = new ArrayList<>();
             decFragment = new ValueFragment();
             hexFragment = new ValueFragment();
@@ -53,7 +55,13 @@ public class MainActivity extends AppCompatActivity implements ValueFragment.Val
     @Override
     public void sendValue(String number, String valueType) {
         int dec;
-        if(valueType.equals(Constants.VALUE_TYPE.DEC)){
+        /*
+         * Converst the value into dec value
+         * Well use dec value as a base for all the conversions
+         */
+        if(number.isEmpty()){
+            dec = 0;
+        }else if(valueType.equals(Constants.VALUE_TYPE.DEC)){
             dec = Integer.valueOf(number);
         }else {
             dec = ValueConverter.toDec(number, valueType);
