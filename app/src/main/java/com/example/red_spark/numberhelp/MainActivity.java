@@ -4,7 +4,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ValueFragment.ValueFragmentListener {
     private FragmentManager mFragmentManager;
 
     @Override
@@ -16,11 +16,20 @@ public class MainActivity extends AppCompatActivity {
         if(savedInstanceState == null) {
             mFragmentManager = getSupportFragmentManager();
             mFragmentManager.beginTransaction()
-                    .add(R.id.fragment_container, new ValueFagment(), "TestFrag1")
-                    .add(R.id.fragment_container, new ValueFagment(), "TestFrag2")
+                    .add(R.id.fragment_container, new ValueFragment(), "TestFrag1")
+                    .add(R.id.fragment_container, new ValueFragment(), "TestFrag2")
                     .commit();
         }
 
+
+    }
+
+    @Override
+    public void sendValue(String number) {
+        ValueFragment valueFagment = (ValueFragment) getSupportFragmentManager()
+                                        .findFragmentByTag("TestFrag2");
+
+        valueFagment.setTextField(number);
 
     }
 }

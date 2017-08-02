@@ -3,18 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.red_spark.numberhelp.ValueFagment"
+    tools:context="com.example.red_spark.numberhelp.ValueFragment"
     android:orientation="horizontal">
 
     <EditText
-        android:id="@+id/numTextField"
+        android:id="@+id/et_NumEditTextField"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="number" />
 
     <Button
-        android:id="@+id/convertBt"
+        android:id="@+id/bt_Convert"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Convert" />
