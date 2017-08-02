@@ -11,6 +11,8 @@ public class MainActivity extends AppCompatActivity implements ValueFragment.Val
 
     private ValueFragment decFragment;
     private ValueFragment hexFragment;
+    private ValueFragment octFragment;
+    private ValueFragment binFragment;
     private ArrayList<ValueFragment> mFragmentList;
 
     @Override
@@ -23,17 +25,25 @@ public class MainActivity extends AppCompatActivity implements ValueFragment.Val
             mFragmentList = new ArrayList<>();
             decFragment = new ValueFragment();
             hexFragment = new ValueFragment();
+            octFragment = new ValueFragment();
+            binFragment = new ValueFragment();
 
             decFragment.setName(Constants.VALUE_TYPE.DEC);
             hexFragment.setName(Constants.VALUE_TYPE.HEX);
+            octFragment.setName(Constants.VALUE_TYPE.OCT);
+            binFragment.setName(Constants.VALUE_TYPE.BIN);
 
             mFragmentList.add(decFragment);
             mFragmentList.add(hexFragment);
+            mFragmentList.add(octFragment);
+            mFragmentList.add(binFragment);
 
             mFragmentManager = getSupportFragmentManager();
             mFragmentManager.beginTransaction()
                     .add(R.id.fragment_container, decFragment)
                     .add(R.id.fragment_container, hexFragment)
+                    .add(R.id.fragment_container, octFragment)
+                    .add(R.id.fragment_container, binFragment)
                     .commit();
         }
 
@@ -42,24 +52,16 @@ public class MainActivity extends AppCompatActivity implements ValueFragment.Val
 
     @Override
     public void sendValue(String number, String valueType) {
+        int dec;
+        if(valueType.equals(Constants.VALUE_TYPE.DEC)){
+            dec = Integer.valueOf(number);
+        }else {
+            dec = ValueConverter.toDec(number, valueType);
+        }
         for(ValueFragment frag: mFragmentList){
             if (!frag.getValueType().equals(valueType)){
-                frag.setTextField(convertValue(number, valueType, frag.getValueType()));
+                frag.setTextField(ValueConverter.convertDecTo(dec, frag.getValueType()));
             }
-        }
-
-
-
-    }
-    private static String convertValue(String number, String valueType, String valueConvertType){
-        switch (valueConvertType){
-            case Constants.VALUE_TYPE.DEC:
-                return ValueConverter.hex2Decimal(number)+"";
-            case Constants.VALUE_TYPE.HEX:
-                return ValueConverter.decimal2Hex(Integer.valueOf(number));
-            default:
-                return "No Value";
-
         }
 
 
