@@ -10,9 +10,15 @@ public class InputHelper {
        return isDigit(value);
     }
     public static boolean checkIfHex(String value){
-
-
-        return false;
+        for(int i = 0; i< value.length(); i++) {
+            String digit = Character.toString(value.charAt(i));
+            if(!isDigit(digit)){
+                if(!isHexChar(digit.charAt(0))){
+                    return false;
+                }
+            }
+        }
+        return true;
     }
     public static boolean checkIfOct(String value){
         if(isDigit(value)){
@@ -57,5 +63,14 @@ public class InputHelper {
             return false;
         }
 
+    }
+    private static boolean isHexChar(char value){
+        char [] hexChars = {'A', 'B', 'C', 'D', 'E', 'F'};
+        for(char c: hexChars){
+            if(c == Character.toUpperCase(value)){
+                return true;
+            }
+        }
+        return false;
     }
 }

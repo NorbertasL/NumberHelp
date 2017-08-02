@@ -24,7 +24,6 @@ import butterknife.Unbinder;
  */
 public class ValueFragment extends Fragment {
     @BindView(R.id.et_NumEditTextField) EditText mTextField;
-    @BindView(R.id.bt_Convert) Button mConvertButton;
     @BindView(R.id.tv_ValueName)TextView mName;
 
     //Used by butterknife to set views to null
@@ -33,7 +32,7 @@ public class ValueFragment extends Fragment {
     private String valueType = "";
 
     public interface ValueFragmentListener{
-        public void sendValue(String number, String valueType);
+        void sendValue(String number, String valueType);
     }
 
     @Override
@@ -83,14 +82,6 @@ public class ValueFragment extends Fragment {
                 }
              }
         });
-
-        mConvertButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                sendData();
-            }
-        });
-
 
         return rootView;
     }

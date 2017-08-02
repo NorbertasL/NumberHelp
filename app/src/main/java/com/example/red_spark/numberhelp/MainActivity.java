@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import com.example.red_spark.numberhelp.tools.ValueConverter;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements ValueFragment.ValueFragmentListener {
@@ -56,15 +57,15 @@ public class MainActivity extends AppCompatActivity implements ValueFragment.Val
 
     @Override
     public void sendValue(String number, String valueType) {
-        int dec;
+        BigInteger dec;
         /*
          * Converst the value into dec value
          * Well use dec value as a base for all the conversions
          */
         if(number.isEmpty()){
-            dec = 0;
+            dec =BigInteger.valueOf(0);
         }else if(valueType.equals(Constants.VALUE_TYPE.DEC)){
-            dec = Integer.valueOf(number);
+            dec = new BigInteger(number);
         }else {
             dec = ValueConverter.toDec(number, valueType);
         }
