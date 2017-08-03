@@ -97,6 +97,7 @@ public class ValueFragment extends Fragment {
                         //Bad input, so we revert the text back
                         mTextField.setText(lastValidString);
 
+
                         mTextField.setSelection(mTextField.length());
 
 

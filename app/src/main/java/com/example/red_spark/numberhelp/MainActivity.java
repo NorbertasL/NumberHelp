@@ -2,14 +2,18 @@ package com.example.red_spark.numberhelp;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 
 import com.example.red_spark.numberhelp.tools.ValueConverter;
-
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
 import java.math.BigInteger;
-import java.util.ArrayList;
 import java.util.List;
+
 
 public class MainActivity extends AppCompatActivity implements ValueFragment.ValueFragmentListener {
     private FragmentManager mFragmentManager;
@@ -19,10 +23,23 @@ public class MainActivity extends AppCompatActivity implements ValueFragment.Val
     private ValueFragment octFragment;
     private ValueFragment binFragment;
 
+    //if i try to use butterkife to bind the view, i get a nullPointException.
+    private AdView adView;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        //Setting up bottom banner ad
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView = (AdView)this.findViewById(R.id.adView);
+        adView.loadAd(adRequest);
+
+
+
 
         mFragmentManager = getSupportFragmentManager();
         //checking for save instance state
