@@ -2,21 +2,30 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context="com.example.red_spark.numberhelp.ValueFragment"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:background="@color/colorPrimaryDark"
+    android:layout_margin="2dp"
+    >
 
     <TextView
         android:id="@+id/tv_ValueName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:textSize="30sp"
+        android:padding="10dp"
+        android:width="90dp"
+        android:text="\?\?"
+        android:textColor="@color/lightText"/>
 
     <EditText
         android:id="@+id/et_NumEditTextField"
         android:inputType="textMultiLine"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10" />
+        android:textSize="35sp"
+        android:ems="10"
+        android:textColor="@color/lightText"/>
 
 </LinearLayout>

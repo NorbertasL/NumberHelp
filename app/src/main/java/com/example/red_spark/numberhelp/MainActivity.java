@@ -1,5 +1,6 @@
 package com.example.red_spark.numberhelp;
 
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import com.example.red_spark.numberhelp.tools.ValueConverter;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements ValueFragment.ValueFragmentListener {
     private FragmentManager mFragmentManager;
@@ -16,18 +18,17 @@ public class MainActivity extends AppCompatActivity implements ValueFragment.Val
     private ValueFragment hexFragment;
     private ValueFragment octFragment;
     private ValueFragment binFragment;
-    private ArrayList<ValueFragment> mFragmentList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mFragmentManager = getSupportFragmentManager();
         //checking for save instance state
         if(savedInstanceState == null) {
 
             //I know this is a bit messy, ill fix in when I have time
-            mFragmentList = new ArrayList<>();
             decFragment = new ValueFragment();
             hexFragment = new ValueFragment();
             octFragment = new ValueFragment();
@@ -38,12 +39,6 @@ public class MainActivity extends AppCompatActivity implements ValueFragment.Val
             octFragment.setName(Constants.VALUE_TYPE.OCT);
             binFragment.setName(Constants.VALUE_TYPE.BIN);
 
-            mFragmentList.add(decFragment);
-            mFragmentList.add(hexFragment);
-            mFragmentList.add(octFragment);
-            mFragmentList.add(binFragment);
-
-            mFragmentManager = getSupportFragmentManager();
             mFragmentManager.beginTransaction()
                     .add(R.id.fragment_container, decFragment)
                     .add(R.id.fragment_container, hexFragment)
@@ -69,9 +64,13 @@ public class MainActivity extends AppCompatActivity implements ValueFragment.Val
         }else {
             dec = ValueConverter.toDec(number, valueType);
         }
-        for(ValueFragment frag: mFragmentList){
-            if (!frag.getValueType().equals(valueType)){
-                frag.setTextField(ValueConverter.convertDecTo(dec, frag.getValueType()));
+
+        //Loops trough all the fragments and updates the values
+        List<Fragment> fragmentList = mFragmentManager.getFragments();
+        for(Fragment fragment: fragmentList){
+            ValueFragment myFrag = (ValueFragment) fragment;
+            if (!myFrag.getValueType().equals(valueType)){
+                myFrag.setTextField(ValueConverter.convertDecTo(dec, myFrag.getValueType()));
             }
         }
 

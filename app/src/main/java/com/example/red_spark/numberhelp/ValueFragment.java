@@ -22,6 +22,11 @@ import butterknife.Unbinder;
  * A simple {@link Fragment} subclass.
  */
 public class ValueFragment extends Fragment {
+    //used for instance save
+    private final static String TEXT_FIELD_KEY = "text_field_key";
+    private final static String LABEL_FIELD_KEY = "label_field_key";
+
+
     @BindView(R.id.et_NumEditTextField) EditText mTextField;
     @BindView(R.id.tv_ValueName)TextView mName;
 
@@ -29,6 +34,7 @@ public class ValueFragment extends Fragment {
     private Unbinder unbinder;
     private ValueFragmentListener mListener;
     private String valueType = "";
+
 
     public interface ValueFragmentListener{
         void sendValue(String number, String valueType);
@@ -55,6 +61,15 @@ public class ValueFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_value, container, false);
         unbinder = ButterKnife.bind(this, rootView);
+
+
+        //Restores the state
+        if(savedInstanceState != null){
+            valueType = savedInstanceState.getString(LABEL_FIELD_KEY);
+            mTextField.setText(savedInstanceState.getString(TEXT_FIELD_KEY));
+        }
+
+
         mName.setText(valueType);
 
 
@@ -65,6 +80,8 @@ public class ValueFragment extends Fragment {
                 //Storing the string before making any changes to is
                 //this will hell restoring it
                 lastValidString = mTextField.getText().toString();
+
+
             }
 
 
@@ -80,7 +97,7 @@ public class ValueFragment extends Fragment {
                         //Bad input, so we revert the text back
                         mTextField.setText(lastValidString);
 
-                        //mTextField.setSelection(selection);
+                        mTextField.setSelection(mTextField.length());
 
 
 
@@ -145,4 +162,12 @@ public class ValueFragment extends Fragment {
         return false;
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putString(TEXT_FIELD_KEY, mTextField.getText().toString());
+        outState.putString(LABEL_FIELD_KEY, valueType);
+
+    }
 }

@@ -54,16 +54,9 @@ public class InputHelper {
     }
 
     private static boolean isDigit(String value){
-        //tries to cast the string into a long.If it fails that means the string contains
-        //non-numeric values
-        /*
-        try{
-            Long.valueOf(value);
-            return true;
-        }catch (NumberFormatException e){
-            return false;
-        }
-        */
+
+        //.matches() check for the patter
+        // the \d+ check for digits
         if(!value.matches("\\d+")){
             return false;
         }
