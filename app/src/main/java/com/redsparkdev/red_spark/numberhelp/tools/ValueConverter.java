@@ -1,6 +1,6 @@
-package com.example.red_spark.numberhelp.tools;
+package com.redsparkdev.red_spark.numberhelp.tools;
 
-import com.example.red_spark.numberhelp.Constants.VALUE_TYPE;
+import com.redsparkdev.red_spark.numberhelp.Constants.VALUE_TYPE;
 
 import java.math.BigInteger;
 
@@ -19,7 +19,6 @@ public class ValueConverter {
             case VALUE_TYPE.BIN:
                 return new BigInteger(value, 2);
             default:
-                // TODO: 02-Aug-17
                 return null;
         }
     }

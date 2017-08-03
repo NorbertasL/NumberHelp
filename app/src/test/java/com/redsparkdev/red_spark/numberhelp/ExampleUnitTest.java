@@ -1,4 +1,4 @@
-package com.example.red_spark.numberhelp;
+package com.redsparkdev.red_spark.numberhelp;
 
 import org.junit.Test;
 

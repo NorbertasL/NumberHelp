@@ -1,4 +1,4 @@
-package com.example.red_spark.numberhelp;
+package com.redsparkdev.red_spark.numberhelp;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.red_spark.numberhelp.tools.InputHelper;
+import com.redsparkdev.red_spark.numberhelp.tools.InputHelper;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -141,7 +141,6 @@ public class ValueFragment extends Fragment {
 
     //check if the user inputs is valid
     public boolean inputCheck(String s){
-        //TODO implement negative numbers too
 
         if(s.isEmpty()){
             return true;

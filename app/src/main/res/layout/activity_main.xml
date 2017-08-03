@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.red_spark.numberhelp.MainActivity"
+    tools:context="com.redsparkdev.red_spark.numberhelp.MainActivity"
     android:background="#757575">
 
     <ScrollView
@@ -27,7 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         ads:adSize="BANNER"
-        ads:adUnitId="ca-app-pub-3940256099942544/6300978111"
+        ads:adUnitId=""
         android:layout_gravity="center|bottom">
     </com.google.android.gms.ads.AdView>
 <!--Test is use for  ads:adUnitId-->
