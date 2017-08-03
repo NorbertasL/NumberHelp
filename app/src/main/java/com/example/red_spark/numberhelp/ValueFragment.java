@@ -8,7 +8,6 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -51,30 +50,39 @@ public class ValueFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_value, container, false);
         unbinder = ButterKnife.bind(this, rootView);
         mName.setText(valueType);
 
+
         mTextField.addTextChangedListener(new TextWatcher() {
+            String lastValidString = "";
             @Override
             public void beforeTextChanged(CharSequence c, int start, int count, int after) {
+                //Storing the string before making any changes to is
+                //this will hell restoring it
+                lastValidString = mTextField.getText().toString();
             }
+
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+
             }
 
             @Override
              public void afterTextChanged(Editable s) {
                 if(mTextField.hasFocus()) {
                     if(!inputCheck(mTextField.getText().toString())){
-                        String temp = mTextField.getText().toString();
-                        temp = temp.substring(0, temp.length()-1);
-                        mTextField.setText(temp);
+                        //Bad input, so we revert the text back
+                        mTextField.setText(lastValidString);
 
-                        //setSelection moves the cursor to the end of the text field
-                        mTextField.setSelection(temp.length());
+                        //mTextField.setSelection(selection);
+
+
 
                     }else {
                         sendData();

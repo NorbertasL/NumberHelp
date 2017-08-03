@@ -56,12 +56,18 @@ public class InputHelper {
     private static boolean isDigit(String value){
         //tries to cast the string into a long.If it fails that means the string contains
         //non-numeric values
+        /*
         try{
             Long.valueOf(value);
             return true;
         }catch (NumberFormatException e){
             return false;
         }
+        */
+        if(!value.matches("\\d+")){
+            return false;
+        }
+        return true;
 
     }
     private static boolean isHexChar(char value){
